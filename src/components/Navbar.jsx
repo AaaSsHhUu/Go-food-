@@ -2,32 +2,27 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div>
-        <nav classname="navbar navbar-expand-lg bg-body-tertiary">
-            <div classname="container-fluid">
-                <a classname="navbar-brand" href="#">Navbar</a>
-                <button classname="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span classname="navbar-toggler-icon"></span>
-                </button>
-                <div classname="collapse navbar-collapse" id="navbarNav">
-                    <ul classname="navbar-nav">
-                        <li classname="nav-item">
-                            <a classname="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li classname="nav-item">
-                            <a classname="nav-link" href="#">Features</a>
-                        </li>
-                        <li classname="nav-item">
-                            <a classname="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li classname="nav-item">
-                            <a classname="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+    <nav className='bg-gray-700 text-white py-4 px-8 w-screen flex flex-col md:flex-row items-center'>
+        <div className='font-bold text-2xl'>
+            NAVBAR
+        </div>
+        <div className='ml-8 '>
+            <ul className='flex flex-col md:flex-row text-white gap-3 list-none items-center'>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/">About</a>
+                </li>
+                <li>
+                    <a href="/">Contact</a>
+                </li>
+                <li>
+                    <a href="/">Blog</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
   )
 }
 
