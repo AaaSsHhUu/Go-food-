@@ -5,7 +5,7 @@ export default function Card() {
     <>
       <div className="bg-white rounded-md m-3 w-80 h-56 mt-3">
         <div className="w-80 max-h-96 m-3 flex flex-col">
-          <img src="" className="w-full" />
+          <img src="" className="" />
           <div className="">
             <h5 className="font-bold text-xl">Card Title</h5>
             <p>
