@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <nav className='bg-green-600 text-white py-4 px-8 w-screen flex flex-col md:flex-row items-center'>
+    <nav className='bg-green-600 text-white py-4 px-8 w-full flex flex-col md:flex-row items-center'>
         <div className='font-bold text-2xl'>
             GoFood
         </div>
