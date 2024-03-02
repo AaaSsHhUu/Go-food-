@@ -10,9 +10,14 @@ connectDB(mongoURI)
 .then(() => console.log("Connected Successfully"))
 .catch(err => console.log(err));
 
+app.use(express.json());
+app.use(express.urlencoded({extended : true}));
+
 app.get("/", (req,res)=>{
     res.send("Root");
 })
+
+app.use("/user", require("./routes/user"));
 
 app.listen(port,()=>{
     console.log(`Listening to port ${port}`);
