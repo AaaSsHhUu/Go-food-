@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { RiMenu2Line } from "react-icons/ri";
 
 const Navbar = () => {
+
+    const [navState, setNavState] = useState("");
+
   return (
-    <nav className='bg-green-600 text-white py-4 px-6 w-full flex flex-col sm:flex-row justify-around items-center'>
+    <nav className='bg-green-600 text-white py-4 px-6 w-full flex flex-col gap-3 md:flex-row md:justify-around items-center'>
+        {/* Logo */}
         <div className='font-bold text-3xl'>
             GoFood
         </div>
 
-        <div className='flex items-center justify-center mx-auto w-5/12'>
-            <input type="text" placeholder='What do you want to eat?' className='border-none w-3/4 outline-none rounded-l-md px-3 py-2 text-gray-700'/>
+        {/* Searchbar */}
+        <div className='flex items-center justify-center mx-auto sm:w-full md:w-5/12'>
+            <input type="text" placeholder='What do you want to eat?' className='border-none sm:2/4 md:w-3/4 outline-none rounded-l-md px-3 py-2 text-gray-700'/>
             <button className='bg-green-400 text-white font-bold rounded-r-md py-2 px-3'>Search</button>
+            <div className='sm:hidden text-xl ml-4'><RiMenu2Line onClick={() => setNavState(navState === "" ? "hidden" : "")} /></div>
         </div>
 
-        <div className='flex flex-col sm:flex-row justify-evenly items-center'>
-            <ul className='flex flex-col md:flex-row text-white gap-6 text-lg font-bold list-none items-center'>
+
+        {/* Nav Links */}
+        <div className={navState}>
+            <ul className='flex flex-col md:flex-row text-white sm:text-md sm:gap-3 md:gap-6 md:text-lg font-bold list-none items-center'>
                 <li>
                     <NavLink to="/">Home</NavLink>
                 </li>
