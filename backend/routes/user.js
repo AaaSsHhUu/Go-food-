@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {createUser} = require("../controller/user");
-const { body, validationResult } = require("express-validator")
+const { body } = require("express-validator")
 
 
 router.post("/new",[
