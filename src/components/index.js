@@ -3,7 +3,8 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import Login from "./Login/Login";
 import Card from "./Cards/Card";
+import Signup from "./Signup/Signup";
 import DefaultCarousel from "./Carousel/Carousel";
 
 
-export { Home, Navbar, Footer, Login, Card, DefaultCarousel }
+export { Home, Navbar, Footer, Login, Card, DefaultCarousel, Signup }

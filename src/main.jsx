@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css';
 import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from 'react-router-dom'
-import { Home, Login } from './components/index.js';
+import { Home, Login, Signup } from './components/index.js';
 
 
 
@@ -12,6 +12,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />} >
       <Route path='' element={<Home />} />
       <Route path='login' element={<Login />} />
+      <Route path='signup' element={<Signup />} />
     </Route>
   )
 )
