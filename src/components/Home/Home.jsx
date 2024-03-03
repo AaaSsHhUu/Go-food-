@@ -11,7 +11,7 @@ const Home = () => {
   return (
       <>
         <div className=' from-gray-500 to-gray-500'>
-          <div className='w-full flex justify-center'>
+          <div className='w-full hidden md:flex justify-center'>
             <DefaultCarousel slides={slides} />
           </div>
         </div>
