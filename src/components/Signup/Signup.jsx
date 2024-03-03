@@ -1,35 +1,126 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [userCredentials, setUserCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+    location: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:5000/user/new", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: userCredentials.name,
+        email: userCredentials.email,
+        password: userCredentials.password,
+        geolocation: userCredentials.location,
+      }),
+    });
+  };
+
+  const onChange = (e) => {
+    setUserCredentials({...userCredentials,[e.target.name] : e.target.value});
+  };
+
   return (
-    <div className='bg-green-300 p-4 h-screen grid place-items-center'>
-        <div className='bg-white w-full sm:w-2/4 flex min-h-[60vh] py-4 rounded-lg flex-col items-center'>
-            <div className='w-[90%] sm:w-3/4 px-4 py-2 rounded-lg'>
-                <label htmlFor="username" className='my-2 font-bold'>Username</label>
-                <br />
-                <input type="text" id='username' placeholder='Enter Username' className='focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2' required />
-            </div>
-
-            <div className='w-[90%] sm:w-3/4 px-4 py-2 rounded-lg'>
-                <label htmlFor="email" className='my-2 font-bold'>Email</label>
-                <br />
-                <input type="email" id='email' placeholder='Enter Email' className='focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2' required />
-            </div>
-
-            <div className='w-[90%] sm:w-3/4 px-4 py-2 rounded-lg'>
-                <label htmlFor="password" className='my-2 font-bold'>Password</label>
-                <br />
-                <input type="password" id='password' placeholder='Enter Password' className='focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2' required />
-            </div>
-            <div className='text-center my-4'>
-                <button className='bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500'>Sign up</button>
-                <br />
-                <Link to={"/login"} className='text-blue-600 hover:underline text-sm'>Already have an account? Login</Link>
-            </div>
-        </div> 
+    <div className="bg-green-300 p-4 h-screen grid place-items-center">
+      <div className="bg-white w-full sm:w-2/4 flex min-h-[60vh] py-4 rounded-lg flex-col items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col items-center"
+        >
+          {/* Username */}
+          <div className="w-[90%] sm:w-3/4 px-4 py-2 rounded-lg">
+            <label htmlFor="username" className="my-2 font-bold">
+              Username
+            </label>
+            <br />
+            <input
+              type="text"
+              id="username"
+              name="name"
+              value={userCredentials.name}
+              onChange={onChange}
+              placeholder="Enter Username"
+              className="focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2"
+              required
+            />
+          </div>
+          {/* Email */}
+          <div className="w-[90%] sm:w-3/4 px-4 py-2 rounded-lg">
+            <label htmlFor="email" className="my-2 font-bold">
+              Email
+            </label>
+            <br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={userCredentials.email}
+              onChange={onChange}
+              placeholder="Enter Email"
+              className="focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2"
+              required
+            />
+          </div>
+          {/* Password */}
+          <div className="w-[90%] sm:w-3/4 px-4 py-2 rounded-lg">
+            <label htmlFor="password" className="my-2 font-bold">
+              Password
+            </label>
+            <br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={userCredentials.password}
+              onChange={onChange}
+              placeholder="Enter Password"
+              className="focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2"
+              required
+            />
+          </div>
+          {/* Address */}
+          <div className="w-[90%] sm:w-3/4 px-4 py-2 rounded-lg">
+            <label htmlFor="geolocation" className="my-2 font-bold">
+              Address
+            </label>
+            <br />
+            <input
+              type="text"
+              id="geolocation"
+              name="location"
+              value={userCredentials.location}
+              onChange={onChange}
+              placeholder="Enter Address"
+              className="focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2"
+              required
+            />
+          </div>
+          {/* Submit btn */}
+          <div className="text-center my-4">
+            <button className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500">
+              Sign up
+            </button>
+            <br />
+            <Link
+              to={"/login"}
+              className="text-blue-600 hover:underline text-sm"
+            >
+              Already have an account? Login
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
