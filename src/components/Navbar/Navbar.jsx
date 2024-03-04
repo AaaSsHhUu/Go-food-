@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { RiMenu2Line } from "react-icons/ri";
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
 
@@ -10,7 +11,7 @@ const Navbar = () => {
     <nav className='bg-green-600 text-white py-4 px-6 w-full flex flex-col gap-3 md:flex-row md:justify-around items-center'>
         {/* Logo */}
         <div className='font-bold text-3xl'>
-            GoFood
+            <Link to={'/'} ><img src={logo} alt="logo" className='w-16 inline-block cursor-pointer' />GoFood</Link>
         </div>
 
         {/* Searchbar */}
