@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -9,7 +10,10 @@ const Signup = () => {
     location: "",
   });
 
+  const [viewPassword, setViewPassword] = useState(false);
+
   const handleSubmit = async (e) => {
+    console.log("handleSubmit");
     e.preventDefault();
     const response = await fetch("http://localhost:5000/user/new", {
       method: "POST",
@@ -76,16 +80,21 @@ const Signup = () => {
               Password
             </label>
             <br />
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={userCredentials.password}
-              onChange={onChange}
-              placeholder="Enter Password"
-              className="focus:outline-2 focus:outline-green-400 rounded-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 py-2"
-              required
-            />
+            <div className="flex items-center focus:outline-2 focus:outline-green-400 bg-gray-200 rounded-md pr-4">
+              <input
+                type={viewPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={userCredentials.password}
+                onChange={onChange}
+                placeholder="Enter Password"
+                className="rounded-l-md my-2 border-2 border-none outline-none w-full bg-gray-200 px-4 "
+                required
+              />
+              <div onClick={() => setViewPassword(!viewPassword)} className="text-lg cursor-pointer rounded-r-md" >{viewPassword ? <FaEye /> : <FaRegEyeSlash />}</div>
+            </div>
+            
+
           </div>
           {/* Address */}
           <div className="w-[90%] sm:w-3/4 px-4 py-2 rounded-lg">
