@@ -13,20 +13,25 @@ const Signup = () => {
   const [viewPassword, setViewPassword] = useState(false);
 
   const handleSubmit = async (e) => {
-    console.log("handleSubmit");
     e.preventDefault();
     const response = await fetch("http://localhost:5000/user/new", {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: userCredentials.name,
         email: userCredentials.email,
         password: userCredentials.password,
-        geolocation: userCredentials.location,
+        location: userCredentials.location,
       }),
     });
+    const json = await response.json();
+    console.log(json)
+
+    if(!json.success){
+      alert("Enter valid credentials");
+    }
   };
 
   const onChange = (e) => {
