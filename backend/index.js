@@ -2,14 +2,11 @@ const express = require("express");
 const app = express();
 const connectDB = require("./db");
 const port = 5000;
-const dotenv = require("dotenv").config();
 const cors = require("./middleware/cors");
+const connectDB = require("./db");
 
 // Connecting to Database
-const mongoURI = process.env.MONGODB_URL;
-connectDB(mongoURI)
-.then(() => console.log("Connected Successfully"))
-.catch(err => console.log(err));
+connectDB()
 
 app.use(cors);
 
