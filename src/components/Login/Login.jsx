@@ -29,6 +29,7 @@ function Login() {
         alert("Enter Valid credentials");
     }
     if(json.success){
+        localStorage.setItem("authToken",json.auth_token);
         navigate("/");
     }
   };
