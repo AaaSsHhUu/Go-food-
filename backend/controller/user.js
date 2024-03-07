@@ -18,4 +18,24 @@ const createUser = async (req,res)=>{
     }
 }
 
-module.exports = {createUser}
+const loginUser = async (req, res) => {
+    try{
+
+        const {email, password} = req.body;
+        const isUser = await User.findOne({email});
+        if(!isUser){
+            res.json({error : "User not found"});
+        }
+        if(isUser.password !== password){
+            res.json({error : "Wrong Email or Password"});
+        }
+        
+        return res.json({success : "Logged in successfully"});
+        
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+module.exports = {createUser, loginUser}
