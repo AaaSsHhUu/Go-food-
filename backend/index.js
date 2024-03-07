@@ -3,7 +3,6 @@ const app = express();
 const connectDB = require("./db");
 const port = 5000;
 const cors = require("./middleware/cors");
-const connectDB = require("./db");
 
 // Connecting to Database
 connectDB()
