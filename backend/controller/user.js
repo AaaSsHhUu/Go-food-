@@ -36,7 +36,6 @@ const loginUser = async (req, res) => {
 
 
         const isPassword = await bcrypt.compare(password,isUser.password);
-        console.log(isPassword)
         if(!isPassword){
             res.json({error : "Wrong Email or Password"});
         }
