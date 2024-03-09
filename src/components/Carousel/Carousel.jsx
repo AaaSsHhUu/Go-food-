@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 function DefaultCarousel({ slides }) {
@@ -14,6 +14,14 @@ function DefaultCarousel({ slides }) {
         if(current === slides.length - 1) setCurrent(0);
         else setCurrent(current + 1);
     }
+
+    useEffect(()=>{
+      const intervalId = setInterval(()=>{
+        nextSlide()
+      },5000)
+
+      return () => clearInterval(intervalId)
+    },[current])
 
   return (
     <>
