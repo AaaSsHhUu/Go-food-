@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Card, DefaultCarousel} from '../index';
+import NavContext from '../../context/NavContext';
  
 const Home = () => {
+
+  const {searchVal} = useContext(NavContext);
 
   let slides = [
      "https://source.unsplash.com/random/2100x600/?burger",
@@ -49,14 +52,14 @@ const Home = () => {
               (foodCategory.length > 0) ? foodCategory.map((category) => {
                 return (
                   <div className=''>
-                    <div key={category._id} className='text-3xl font-bold my-4 '>{category.CategoryName}</div>
-                    <hr />
+                    <div key={category._id} className='text-4xl font-bold my-8 title shadow-lg pb-4 '>{category.CategoryName}</div>
+                    
                       <div className='flex flex-col sm:flex-row flex-wrap gap-2'>
                       {
-                          (foodItem.length > 0) ? foodItem.filter((item) => (item.CategoryName === category.CategoryName))
+                          (foodItem.length > 0) ? foodItem.filter((item) => (item.CategoryName === category.CategoryName && item.name.toLowerCase().includes(searchVal)))
                             .map((food) => {
                               return (
-                                <div key={food._id} className='mx-auto'>
+                                <div key={food._id} className='mx-auto hover:scale-105 transition-all duration-75'>
                                   <Card name={food.name} img={food.img} desc={food.description} options= {food.options[0]} />  
                                 </div>
                               )
