@@ -16,8 +16,11 @@ const foodSchema = new Schema({
     },
     options : [
         {
-            half : {type : String,required : true},
-            full : {type : String,required : true}
+            half : {type : String},
+            full : {type : String},
+            regular : {type : String},
+            medium : {type : String},
+            large : {type : String}
         }
     ],
     description : {
