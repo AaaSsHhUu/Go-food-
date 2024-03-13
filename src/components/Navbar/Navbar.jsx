@@ -1,50 +1,80 @@
-import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
+import NavContext from "../../context/NavContext";
 
 const Navbar = () => {
+  const { searchVal, setSearchVal } = useContext(NavContext);
+  const [navState, setNavState] = useState("");
 
-    const [navState, setNavState] = useState("");
 
   return (
-    <nav className='bg-green-600 text-white py-4 px-6 w-full flex flex-col gap-3 md:flex-row md:justify-around items-center'>
-        {/* Logo */}
-        <div className='font-bold text-3xl'>
-            <Link to={'/'} ><img src={logo} alt="logo" className='w-16 inline-block cursor-pointer' />GoFood</Link>
-        </div>
+    <nav className="bg-green-600 text-white py-4 px-6 w-full flex flex-col gap-3 md:flex-row md:justify-around items-center">
+      {/* Logo */}
+      <div className="font-bold text-3xl">
+        <Link to={"/"}>
+          <img
+            src={logo}
+            alt="logo"
+            className="w-16 inline-block cursor-pointer"
+          />
+          GoFood
+        </Link>
+      </div>
 
-        {/* Searchbar */}
-        <div className='flex items-center justify-center mx-auto sm:w-full md:w-5/12'>
-            <input type="text" placeholder='What do you want to eat?' className='border-none sm:2/4 md:w-3/4 outline-none rounded-l-md px-3 py-2 text-gray-700'/>
-            <button className='bg-green-400 text-white font-bold rounded-r-md py-2 px-3'>Search</button>
-            <div className='sm:hidden text-xl ml-4'><RiMenu2Line onClick={() => setNavState(navState === "" ? "hidden" : "")} /></div>
+      {/* Searchbar */}
+      <div className="flex items-center justify-center mx-auto sm:w-full md:w-5/12">
+        <input
+          type="text"
+          placeholder="What do you want to eat?"
+          className="border-none sm:2/4 md:w-3/4 outline-none rounded-l-md px-3 py-2 text-gray-700"
+          value={searchVal}
+          onChange={(e) => setSearchVal(e.target.value)}
+        />
+        <button className="bg-green-400 text-white font-bold rounded-r-md py-2 px-3">
+          Search
+        </button>
+        <div className="sm:hidden text-xl ml-4">
+          <RiMenu2Line
+            onClick={() => setNavState(navState === "" ? "hidden" : "")}
+          />
         </div>
+      </div>
 
-
-        {/* Nav Links */}
-        <div className={navState}>
-            <ul className='flex flex-col md:flex-row text-white sm:text-md sm:gap-3 md:gap-6 md:text-lg font-bold list-none items-center'>
-                <li>
-                    <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/">About</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/">Contact</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/login">Login</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/signup">Sign up</NavLink>
-                </li>
-            </ul>
-        </div>
-        
+      {/* Nav Links */}
+      <div className={navState}>
+        <ul className="flex flex-col md:flex-row text-white sm:text-md sm:gap-3 md:gap-6 md:text-lg font-bold list-none items-center">
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">About</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">Contact</NavLink>
+          </li>
+          {
+            localStorage.getItem("authToken") ? 
+             <li>
+                 <NavLink to="/myorder">My Orders</NavLink>
+             </li>
+             : ""
+          }
+          {
+            localStorage.getItem("authToken") ? 
+             <li>
+                <button onClick = {()=> localStorage.removeItem("authToken")} >Logout</button>
+             </li>
+             :
+             <li>
+                <NavLink to="/login">Login</NavLink>
+             </li>
+          }
+        </ul>
+      </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
