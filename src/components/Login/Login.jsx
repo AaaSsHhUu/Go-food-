@@ -11,7 +11,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/user/login", {
+    const response = await fetch("/api/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,10 +28,7 @@ function Login() {
     if(!json.success){
         alert("Enter Valid credentials");
     }
-    if(json.success){
-        localStorage.setItem("authToken",json.auth_token);
-        navigate("/");
-    }
+
   };
 
   const onChange = (e)=>{
