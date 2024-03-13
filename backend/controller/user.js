@@ -2,7 +2,7 @@ const User = require("../models/User");
 const { validationResult } = require("express-validator")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+const ExpressError = require("../middleware/ExpressError");
 
 // Sign up 
 const createUser = async (req,res)=>{
@@ -28,26 +28,32 @@ const loginUser = async (req, res) => {
     try{
 
         const {email,password} = req.body;
+
+        if(!email || !password){
+            res.status(400);
+            throw new ExpressError(400,"All fields are mandatory");
+        }
+
         const isUser = await User.findOne({email});
-        console.log(isUser);
-        if(!isUser){
-            res.json({error : "User not found"});
-        }
-
-
-        const isPassword = await bcrypt.compare(password,isUser.password);
-        if(!isPassword){
-            res.json({error : "Wrong Email or Password"});
-        }
+        // console.log(isUser);
         
-        const data = {
-            user : {
-                id : isUser.id
-            }
+        if(isUser && await bcrypt.compare(password,isUser.password)){
+            const accessToken = jwt.sign({
+                user : {
+                    name : isUser.name,
+                    email : isUser.email,
+                    id : isUser._id
+                }
+            },process.env.SECRET_KEY,{
+                expiresIn : "30m"
+            })
+            res.status(200).json({accessToken});
+            localStorage.setItem("accessToken",accessToken);
         }
-
-        const authToken = jwt.sign(data,process.env.SECRET_KEY,)
-        return res.json({success : "Logged in successfully", auth_token : authToken});
+        else{
+            res.status(401);
+            throw new ExpressError(401,"Email or Password is not valid");
+        }
         
     }
     catch(err){
