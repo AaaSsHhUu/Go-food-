@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const asyncHandler = require("express-async-handler");
 
-router.post("/foodData",(req,res) => {
-    try{
+router.post("/foodData",asyncHandler((req,res) => {
         res.send([global.food_data,global.foodCategory]);
-    }
-    catch(err){
-        res.send(err.message)
-    }
-})
+}))
 
 module.exports = router
