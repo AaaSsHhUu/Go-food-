@@ -21,14 +21,11 @@ function Login() {
         password: userCredentials.password,
       }),
     });
-
     const json = await response.json();
-    console.log(json);
-
-    if(!json.success){
-        alert("Enter Valid credentials");
-    }
-
+    let {accessToken} = json
+    // console.log(accessToken);
+    localStorage.setItem("accessToken",accessToken);
+    navigate("/");
   };
 
   const onChange = (e)=>{
@@ -42,6 +39,7 @@ function Login() {
           className="w-full flex flex-col items-center"
           onSubmit={handleSubmit}
         >
+          {/* Email */}
           <div className="w-[90%] sm:w-3/4 px-4 py-2 rounded-lg">
             <label htmlFor="email" className="my-2 font-bold">
               Email
@@ -58,7 +56,7 @@ function Login() {
               onChange={onChange}
             />
           </div>
-
+          {/* Password */}
           <div className="w-[90%] sm:w-3/4 px-4 py-2 rounded-lg">
             <label htmlFor="password" className="my-2 font-bold">
               Password
@@ -75,6 +73,7 @@ function Login() {
               onChange={onChange}
             />
           </div>
+          {/* Login button */}
           <div className="text-center my-4">
             <button className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500">
               Login
