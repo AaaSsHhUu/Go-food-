@@ -17,8 +17,7 @@ const Home = () => {
 
   const loadData = async () => {
     try{
-
-      let response = await fetch("http://localhost:5000/data/foodData",{
+      let response = await fetch("/api/data/foodData",{
         method : "POST",
         headers : {
           "Content-Type" : "application/json"
