@@ -11,21 +11,16 @@ const createUser = async (req,res)=>{
     if(!errors.isEmpty()){
         return res.status(400).json({error : errors.array() })
     }
-    try{
-        const salt = await bcrypt.genSalt(10);
-        const newUser = req.body;
-        newUser.password = await bcrypt.hash(req.body.password,salt)
-        const user = await User.create(newUser);
-        res.send(user);
-    }
-    catch(err){
-        res.json({success : false , msg : err})
-    }
+
+    const salt = await bcrypt.genSalt(10);
+    const newUser = req.body;
+    newUser.password = await bcrypt.hash(req.body.password,salt)
+    const user = await User.create(newUser);
+    res.send(user);    
 }
 
 // Log in 
 const loginUser = async (req, res) => {
-    try{
 
         const {email,password} = req.body;
 
@@ -55,10 +50,7 @@ const loginUser = async (req, res) => {
             throw new ExpressError(401,"Email or Password is not valid");
         }
         
-    }
-    catch(err){
-        console.log(err);
-    }
+    
 }
 
 module.exports = {createUser, loginUser}
