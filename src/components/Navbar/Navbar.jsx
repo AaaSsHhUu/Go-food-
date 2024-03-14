@@ -35,7 +35,7 @@ const Navbar = () => {
         <button className="bg-green-400 text-white font-bold rounded-r-md py-2 px-3">
           Search
         </button>
-        <div className="sm:hidden text-xl ml-4">
+        <div className="md:hidden text-xl ml-4">
           <RiMenu2Line
             onClick={() => setNavState(navState === "" ? "hidden" : "")}
           />
@@ -55,16 +55,16 @@ const Navbar = () => {
             <NavLink to="/">Contact</NavLink>
           </li>
           {
-            localStorage.getItem("authToken") ? 
+            localStorage.getItem("accessToken") ? 
              <li>
                  <NavLink to="/myorder">My Orders</NavLink>
              </li>
              : ""
           }
           {
-            localStorage.getItem("authToken") ? 
+            localStorage.getItem("accessToken") ? 
              <li>
-                <button onClick = {()=> localStorage.removeItem("authToken")} >Logout</button>
+                <button onClick = {()=> localStorage.removeItem("accessToken")} >Logout</button>
              </li>
              :
              <li>
