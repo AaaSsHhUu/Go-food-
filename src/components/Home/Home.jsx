@@ -23,7 +23,6 @@ const Home = () => {
           "Content-Type" : "application/json"
         }
       })
-      
       response = await response.json();
       console.log(response[0],response[1]);
 
@@ -58,7 +57,7 @@ const Home = () => {
                           (foodItem.length > 0) ? foodItem.filter((item) => (item.CategoryName === category.CategoryName && item.name.toLowerCase().includes(searchVal)))
                             .map((food) => {
                               return (
-                                <div key={food._id} className='mx-auto hover:scale-105 transition-all duration-75'>
+                                <div key={food._id} className='mx-auto hover:scale-105 transition-all duration-200'>
                                   <Card name={food.name} img={food.img} desc={food.description} options= {food.options[0]} />  
                                 </div>
                               )
