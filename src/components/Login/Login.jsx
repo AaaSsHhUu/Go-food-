@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import NavContext from "../../context/NavContext";
 
 function Login() {
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
   });
-
+  const { setIsLoggedIn } = useContext(NavContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -25,6 +26,7 @@ function Login() {
     let {accessToken} = json
     // console.log(accessToken);
     localStorage.setItem("accessToken",accessToken);
+    setIsLoggedIn(true);
     navigate("/");
   };
 

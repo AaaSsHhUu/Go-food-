@@ -1,13 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState, } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 import logo from "../../assets/logo.png";
 import NavContext from "../../context/NavContext";
 
 const Navbar = () => {
-  const { searchVal, setSearchVal } = useContext(NavContext);
+  const { searchVal, setSearchVal,isLoggedIn,setIsLoggedIn } = useContext(NavContext);
   const [navState, setNavState] = useState("");
 
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("accessToken"));
+  },[])
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
+  }
 
   return (
     <nav className="bg-green-600 text-white py-4 px-6 w-full flex flex-col gap-3 md:flex-row md:justify-around items-center">
@@ -45,31 +53,32 @@ const Navbar = () => {
       {/* Nav Links */}
       <div className={navState}>
         <ul className="flex flex-col md:flex-row text-white sm:text-md sm:gap-3 md:gap-6 md:text-lg font-bold list-none items-center">
-          <li>
+          <li className="hover:bg-green-500 rounded-md py-1 px-2">
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/">About</NavLink>
+          <li className="hover:bg-green-500 rounded-md py-1 px-2">
+            <NavLink to="/about">About</NavLink>
           </li>
-          <li>
-            <NavLink to="/">Contact</NavLink>
+          <li className="hover:bg-green-500 rounded-md py-1 px-2">
+            <NavLink to="/contact">Contact</NavLink>
           </li>
           {
-            localStorage.getItem("accessToken") ? 
-             <li>
+            isLoggedIn ? 
+             <li className="hover:bg-green-500 rounded-md py-1 px-2">
                  <NavLink to="/myorder">My Orders</NavLink>
              </li>
-             : ""
-          }
-          {
-            localStorage.getItem("accessToken") ? 
-             <li>
-                <button onClick = {()=> localStorage.removeItem("accessToken")} >Logout</button>
-             </li>
-             :
-             <li>
+             : 
+             <li className="hover:bg-green-500 rounded-md py-1 px-2">
                 <NavLink to="/login">Login</NavLink>
              </li>
+          }
+          {
+            isLoggedIn ? 
+             <li className="hover:bg-green-500 rounded-md py-1 px-2">
+                 <NavLink type="button" onClick={handleLogout}>Logout</NavLink>
+             </li>
+             : 
+             ""
           }
         </ul>
       </div>
