@@ -57,7 +57,7 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className="hover:bg-green-500 rounded-md py-1 px-2">
-            <NavLink to="/about">About</NavLink>
+            <NavLink to="/cart">My Cart</NavLink>
           </li>
           <li className="hover:bg-green-500 rounded-md py-1 px-2">
             <NavLink to="/contact">Contact</NavLink>
