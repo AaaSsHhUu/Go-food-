@@ -15,7 +15,7 @@ export default function Card({options,foodItems}) {
           type : "ADD",
           id : foodItems._id,
           name : foodItems.name,
-          price : foodItems.price,
+          price : finalPrice,
           qty : qty,
           size : size
         }
