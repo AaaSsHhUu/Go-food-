@@ -1,23 +1,46 @@
-import React from "react";
+import React, { useEffect, useState,useRef } from "react";
+import { FaShoppingCart } from "react-icons/fa";
+import { useDispatchCart, useCart } from "../../context/ContextReducer";
 
-export default function Card({name,img,desc,options}) {
+export default function Card({options,foodItems}) {
+  let dispatch = useDispatchCart();
+  let priceOptions = Object.keys(options)
+  let priceRef = useRef();
+  let [qty,setQty] = useState(1);
+  let [size, setSize] = useState("");
+  let data = useCart();
+  const handleAddToCart = async () => {
+    await dispatch(
+        {
+          type : "ADD",
+          id : foodItems._id,
+          name : foodItems.name,
+          price : foodItems.price,
+          qty : qty,
+          size : size
+        }
+      )
+      console.log(data);
+  }
 
-  let option = options;
-  let priceOptions = Object.keys(option)
+  let finalPrice = qty * parseInt(options[size]);
 
+  useEffect(()=>{
+    setSize(priceRef.current.value);
+  },[])
   return (
     <>
       {/* Outer div */}
-      <div className="bg-white rounded-md w-80 h-[24rem] mt-3 text-black overflow-hidden">
+      <div className="bg-white rounded-md w-80 h-[26rem] mt-3 text-black overflow-hidden">
         {/* Inner div */}
         <div className="w-full h-full flex flex-col ">
-          <img src={img} className="w-full h-2/4" />
-            <h5 className="font-bold text-xl my-2">{name}</h5>
+          <img src={foodItems.img} className="w-full h-2/4" />
+            <h5 className="font-bold text-xl my-1">{foodItems.name}</h5>
             <p className="px-2 mb-2 text-gray-700">
-              {desc}
+              {foodItems.description}
             </p>
-            <div className="w-full flex flex-row justify-evenly my-2 items-center gap-3">
-              <select className="mx-2 bg-green-600 text-white outline-none rounded-md">
+            <div className="w-full flex flex-row justify-evenly my-1 items-center gap-3">
+              <select className="mx-2 bg-green-600 text-white outline-none rounded-md" onChange={(e) => setQty(e.target.value)}>
                 {Array.from(Array(6), (elem, index) => {
                   return (
                     <option key={index + 1} value={index + 1}>
@@ -26,17 +49,28 @@ export default function Card({name,img,desc,options}) {
                   );
                 })}
               </select>
-              <select className="mx-2 bg-green-600 py-1 px-2 text-white outline-none rounded-md">
+              <select className="mx-2 bg-green-600 py-1 px-2 text-white outline-none rounded-md" onChange={(e) => setSize(e.target.value)} ref={priceRef}>
                 {
                   priceOptions.map((data) => {
+                    if(data === "_id"){
+                      return ;
+                    }
                     return <option key={data} value={data}>{data}</option>
                   })
                 }
               </select>
 
               <div className="bg-green-600 py-1 px-2 text-white rounded-lg">
-                Total Price
+                ₹{finalPrice}
               </div>
+            </div>
+            <div>
+              <button 
+                className="bg-green-600 text-white w-2/4 py-2 my-2 mx-4 rounded-lg"
+                onClick={handleAddToCart}
+                >
+                {<FaShoppingCart className="mx-auto" />}
+              </button>
             </div>
           </div>
       </div>
