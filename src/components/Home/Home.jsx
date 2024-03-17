@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {Card, DefaultCarousel} from '../index';
 import NavContext from '../../context/NavContext';
- 
+
 const Home = () => {
 
   const {searchVal} = useContext(NavContext);
@@ -57,8 +57,8 @@ const Home = () => {
                           (foodItem.length > 0) ? foodItem.filter((item) => (item.CategoryName === category.CategoryName && item.name.toLowerCase().includes(searchVal)))
                             .map((food) => {
                               return (
-                                <div key={food._id} className='mx-auto hover:scale-105 transition-all duration-200'>
-                                  <Card name={food.name} img={food.img} desc={food.description} options= {food.options[0]} />  
+                                <div key={food._id} className='mx-auto cursor-pointer'>
+                                  <Card foodItems = {food} options= {food.options[0]} />  
                                 </div>
                               )
                             })
