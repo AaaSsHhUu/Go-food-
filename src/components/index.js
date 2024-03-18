@@ -6,6 +6,7 @@ import Card from "./Cards/Card";
 import Signup from "./Signup/Signup";
 import DefaultCarousel from "./Carousel/Carousel";
 import Contact from "./Contacts/Contact";
+import Cart from "./Cart/Cart";
 
 
-export { Home, Navbar, Footer, Login, Card, DefaultCarousel, Signup, Contact }
+export { Home, Navbar, Footer, Login, Card, DefaultCarousel, Signup, Contact, Cart }
