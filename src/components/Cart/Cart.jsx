@@ -13,10 +13,10 @@ function Cart({setShowCart}) {
     
     // let totalPrice = data.reduce((total,food) => total + food.price , 0);
      return(
-            <div className='fixed inset-0 sm:inset-x-8 sm:inset-y-10 md:inset-x-40 md:inset-y-20 border-white bg-opacity-40 rounded-lg border-2 bg-white backdrop-blur-sm z-10'>
-                <div>
-                    <button className='absolute right-4 -top-3' onClick={() => setShowCart(false)}><FaWindowClose size={"2.5rem"} color='red' /></button>
-                    <div className='w-full px-10 pt-10 grid grid-cols-6 text-white text-center'>
+            <div className='fixed inset-4 bg-opacity-40 rounded-lg flex justify-center  backdrop-blur-sm z-10'>
+                <div className='w-3/4   rounded-lg bg-black bg-opacity-50 '>
+                    <div className='relative w-full px-10 pt-10 grid grid-cols-6 text-center'>
+                        <button className='absolute -top-3 right-4' onClick={() => setShowCart(false)}><FaWindowClose size={"2.5rem"} color='red' /></button>
                         <div className='heading'>S. no.</div>
                         <div className='heading'>Name</div>
                         <div className='heading'>Quantity</div>
