@@ -1,12 +1,15 @@
-import React, { useContext, useEffect, useState, } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 import logo from "../../assets/logo.png";
 import NavContext from "../../context/NavContext";
+import Cart from "../Cart/Cart";
+import ReactDOM  from "react-dom";
 
 const Navbar = () => {
   const { searchVal, setSearchVal,isLoggedIn,setIsLoggedIn } = useContext(NavContext);
   const [navState, setNavState] = useState("");
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("accessToken"));
@@ -56,9 +59,14 @@ const Navbar = () => {
           <li className="hover:bg-green-500 rounded-md py-1 px-2">
             <NavLink to="/">Home</NavLink>
           </li>
+
           <li className="hover:bg-green-500 rounded-md py-1 px-2">
-            <NavLink to="/cart">My Cart</NavLink>
+            <button onClick={() => setShowCart(true)}>My Cart</button>
           </li>
+          {showCart && ReactDOM.createPortal(
+            <Cart setShowCart={setShowCart} /> , document.getElementById("cart")
+          )}
+
           <li className="hover:bg-green-500 rounded-md py-1 px-2">
             <NavLink to="/contact">Contact</NavLink>
           </li>
