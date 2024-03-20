@@ -8,5 +8,5 @@
 }
 
 .heading{
-    @apply text-green-500 font-bold text-3xl text-center mb-8
+    @apply text-green-500 font-bold text-sm sm:text-xl md:text-2xl text-center mb-8
 }
