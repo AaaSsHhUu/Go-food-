@@ -3,13 +3,16 @@ import { Link, NavLink } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 import logo from "../../assets/logo.png";
 import NavContext from "../../context/NavContext";
-import Cart from "../Cart/Cart";
 import ReactDOM  from "react-dom";
+import Cart from "../Cart/Cart";
+import { useCart, useDispatchCart } from "../../context/ContextReducer";
 
 const Navbar = () => {
   const { searchVal, setSearchVal,isLoggedIn,setIsLoggedIn } = useContext(NavContext);
   const [navState, setNavState] = useState("");
   const [showCart, setShowCart] = useState(false);
+  const cartData = useCart();
+  const dispatchCart = useDispatchCart();
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("accessToken"));
@@ -64,7 +67,7 @@ const Navbar = () => {
             <button onClick={() => setShowCart(true)}>My Cart</button>
           </li>
           {showCart && ReactDOM.createPortal(
-            <Cart setShowCart={setShowCart} /> , document.getElementById("cart")
+            <Cart data = {cartData} dispatch={dispatchCart} setShowCart={setShowCart} /> , document.getElementById("cart")
           )}
 
           <li className="hover:bg-green-500 rounded-md py-1 px-2">

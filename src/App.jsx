@@ -9,8 +9,8 @@ function App() {
 
   return (
       <NavContextProvider>
-        <Navbar />
         <CartProvider>
+          <Navbar />
           <Outlet />
         </CartProvider>
         <Footer />
