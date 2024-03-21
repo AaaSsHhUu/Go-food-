@@ -44,6 +44,7 @@ const loginUser = async (req, res) => {
             })
             res.status(200).json({accessToken});
             localStorage.setItem("accessToken",accessToken);
+            localStorage.setItem("userEmail", email)
         }
         else{
             res.status(401);
