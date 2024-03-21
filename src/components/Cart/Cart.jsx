@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useCart, useDispatchCart } from "../../context/ContextReducer";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaWindowClose } from "react-icons/fa";
-import { CartProvider } from "../../context/ContextReducer";
 
 function Cart({ data, dispatch, setShowCart }) {
 
@@ -14,6 +12,13 @@ function Cart({ data, dispatch, setShowCart }) {
       setShowCart(false);
     }
   };
+
+  const handleRemoveCartItem = (index) => {
+    dispatch({
+      type : "REMOVE",
+      index : index
+    })
+  }
 
   useEffect(() => {
     console.log(data);
@@ -51,7 +56,7 @@ function Cart({ data, dispatch, setShowCart }) {
                           <div className="text-xl my-2">{food.qty}</div>
                           <div className="text-xl my-2">{food.size}</div>
                           <div className="text-xl my-2">{food.price}</div>
-                          <button className="w-full">
+                          <button className="w-full" onClick={() => handleRemoveCartItem(index+1)}>
                           {<FaTrashCan className="text-red-700 text-2xl" />}
                           </button>
                       </React.Fragment>
