@@ -17,7 +17,7 @@ const reducer = (state,action) => {
             }]
         case "REMOVE" :
             let newState = [...state];
-            newState = newState.splice(action.index,1)
+            newState.splice(action.index,1);
             return newState;
         default :
             console.log("Error in reducer");
