@@ -64,7 +64,10 @@ const Navbar = () => {
           </li>
 
           <li className="hover:bg-green-500 rounded-md py-1 px-2">
-            <button onClick={() => setShowCart(true)}>My Cart</button>
+            <button onClick={() => setShowCart(true)} className="flex relative">
+                My Cart
+                { cartData.length > 0 && <span className="w-4 h-4 bg-red-600 text-white text-xs rounded-full">{cartData.length}</span>}
+            </button>
           </li>
           {showCart && ReactDOM.createPortal(
             <Cart data = {cartData} dispatch={dispatchCart} setShowCart={setShowCart} /> , document.getElementById("cart")

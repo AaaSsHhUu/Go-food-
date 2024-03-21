@@ -42,7 +42,7 @@ function Cart({ data, dispatch, setShowCart }) {
             <div className="heading">Amount</div>
             <div></div>
 
-            { data ?
+            { data.length > 0 ?
               data.map((food, index) => {
                   return (
                       <React.Fragment key={index + 1}>
