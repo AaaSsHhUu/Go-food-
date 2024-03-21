@@ -20,10 +20,31 @@ function Cart({ data, dispatch, setShowCart }) {
     })
   }
 
+  const handleCheckout = async () => {
+    let userEmail = localStorage.getItem("userEmail");
+    let response = await fetch("/api/order", {
+      method : 'POST',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body : JSON.stringify({
+        email : userEmail,
+        order_data : data,
+        order_date : new Date().toDateString()
+      })
+    })
+    
+    if(response.status === 200){
+        dispatch({
+          type : "DROP"
+        })
+    }
+  }
+
   useEffect(() => {
     console.log(data);
   },[data])
-//   let totalPrice = data.reduce((total,food) => total + food.price , 0);
+  let totalPrice = data.reduce((total,food) => total + food.price , 0);
 
    return (
       <div
@@ -50,13 +71,13 @@ function Cart({ data, dispatch, setShowCart }) {
             { data.length > 0 ?
               data.map((food, index) => {
                   return (
-                      <React.Fragment key={index + 1}>
+                      <React.Fragment key={index}>
                           <div className="text-xl my-2">{index + 1}</div>
                           <div className="text-xl my-2">{food.name}</div>
                           <div className="text-xl my-2">{food.qty}</div>
                           <div className="text-xl my-2">{food.size}</div>
                           <div className="text-xl my-2">{food.price}</div>
-                          <button className="w-full" onClick={() => handleRemoveCartItem(index+1)}>
+                          <button className="w-full" onClick={() => handleRemoveCartItem(index)}>
                           {<FaTrashCan className="text-red-700 text-2xl" />}
                           </button>
                       </React.Fragment>
@@ -64,6 +85,17 @@ function Cart({ data, dispatch, setShowCart }) {
               }) : <h1 className="text-white font-bold text-4xl w-[200px] sm:w-[250px] md:w-[300px]">Cart is Empty</h1> 
             }
           </div>
+          {data.length !== 0 &&
+          <div>
+            <h1 className="text-white my-6 font-bold text-3xl text-center">Total Price : {totalPrice}</h1>
+            <button
+              className="bg-green-600 text-white text-xl font-bold rounded-md px-4 py-2 block mx-auto"
+              onClick={handleCheckout}
+            >
+                check out
+            </button>
+          </div>
+          }
         </div>
       </div>
   )
