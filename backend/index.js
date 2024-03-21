@@ -19,6 +19,7 @@ app.get("/", (req,res)=>{
 
 app.use("/api/user", require("./routes/user"));
 app.use("/api/data", require("./routes/data"));
+app.use("/api/order", require("./routes/order"))
 
 app.listen(port,()=>{
     console.log(`Listening to port ${port}`);
