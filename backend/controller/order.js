@@ -6,15 +6,15 @@ module.exports.orderRoute = async (req,res) => {
 
     // if it's the first order of a user
     let isUser = await Order.findOne({email})
-    console.log(isUser);
+    console.log("isUser : ",isUser);
     if(!isUser){
         let newOrder = await Order.create({email, order_data : data})
-        console.log(newOrder);
-        res.json({success : true})
+        console.log("new order : ",newOrder);
+        res.status(200).json({success : true})
     }
     else{ // user has ordered in past
         let updatedOrder = await Order.findOneAndUpdate({email},{$push : {order_data : data}})
-        console.log(updatedOrder);
-        res.json({success : true})
+        console.log("updatedOrder : ",updatedOrder);
+        res.status(200).json({success : true})
     }
 }
