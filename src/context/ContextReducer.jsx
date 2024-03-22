@@ -19,6 +19,8 @@ const reducer = (state,action) => {
             let newState = [...state];
             newState.splice(action.index,1);
             return newState;
+        case "DROP":
+            return [];
         default :
             console.log("Error in reducer");
     }
