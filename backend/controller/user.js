@@ -42,9 +42,8 @@ const loginUser = async (req, res) => {
             },process.env.SECRET_KEY,{
                 expiresIn : "30m"
             })
-            res.status(200).json({accessToken});
-            localStorage.setItem("accessToken",accessToken);
-            localStorage.setItem("userEmail", email)
+            res.status(200).json({accessToken,email});
+            
         }
         else{
             res.status(401);
