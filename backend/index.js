@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const connectDB = require("./db");
 const port = 5000;
-const cors = require("./middleware/cors");
 const dotenv = require("dotenv").config();
 
 // Connecting to Database
