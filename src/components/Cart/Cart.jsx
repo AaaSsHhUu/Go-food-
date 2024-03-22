@@ -55,6 +55,12 @@ function Cart({ data, dispatch, setShowCart }) {
           dispatch({
             type : "DROP"
           })
+          toast.success("Checked out",{
+            position : 'top-center',
+            autoClose : 3000,
+            closeOnClick : true,
+            hideProgressBar : false
+          })
         }
     }
   }
