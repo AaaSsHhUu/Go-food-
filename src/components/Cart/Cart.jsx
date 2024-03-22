@@ -47,7 +47,6 @@ function Cart({ data, dispatch, setShowCart }) {
           body : JSON.stringify({
             email : userEmail,
             order_data : data,
-            order_date : new Date().toDateString()
           })
         })
       
