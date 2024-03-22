@@ -23,9 +23,10 @@ function Login() {
       }),
     });
     const json = await response.json();
-    let {accessToken} = json
+    let {accessToken,email} = json
     // console.log(accessToken);
     localStorage.setItem("accessToken",accessToken);
+    localStorage.setItem("userEmail",email);
     setIsLoggedIn(true);
     navigate("/");
   };
