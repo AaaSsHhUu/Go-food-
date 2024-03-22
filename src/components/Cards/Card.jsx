@@ -1,6 +1,7 @@
 import React, { useEffect, useState,useRef } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatchCart, useCart } from "../../context/ContextReducer";
+import { toast } from "react-toastify";
 
 export default function Card({options,foodItems}) {
   let dispatch = useDispatchCart();
@@ -20,6 +21,13 @@ export default function Card({options,foodItems}) {
           size : size
         }
       )
+      const toastCondition = {
+        position : 'top-center',
+        autoClose : 5000,
+        closeOnClick : true,
+        hideProgressBar : false
+      }
+      toast.success("Item added to Cart",toastCondition)
       console.log(data);
   }
 
