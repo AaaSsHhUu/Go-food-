@@ -3,6 +3,8 @@ import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import NavContextProvider from './context/NavContextProvider'
 import { CartProvider } from './context/ContextReducer'; 
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
         <CartProvider>
           <Navbar />
           <Outlet />
+          <ToastContainer />
         </CartProvider>
         <Footer />
       </NavContextProvider>   
