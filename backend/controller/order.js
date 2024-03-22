@@ -10,12 +10,12 @@ const orderRoute = async (req,res) => {
     console.log("isUser : ",isUser);
     if(!isUser){
         let newOrder = await Order.create({email, order_data : data})
-        // console.log("new order : ",newOrder);
+        console.log("new order : ",newOrder);
         res.status(200).json({success : true})
     }
     else{ // user has ordered in past
-        let updatedOrder = await Order.findOneAndUpdate({email},{$push : {order_data : data}})
-        // console.log("updatedOrder : ",updatedOrder);
+        let updatedOrder = await Order.findOneAndUpdate({email},{$push : {order_data : data }})
+        console.log("updatedOrder : ",updatedOrder);
         res.status(200).json({success : true})
     }
 }
