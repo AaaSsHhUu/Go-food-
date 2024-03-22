@@ -14,12 +14,14 @@ const Navbar = () => {
   const cartData = useCart();
   const dispatchCart = useDispatchCart();
 
+  // checking if the user is logged in or not on first render
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("accessToken"));
   },[])
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("accessToken"); // getting current user accessToken
+    localStorage.removeItem("userEmail"); // getting current user email
     setIsLoggedIn(false);
   }
 
