@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaWindowClose } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Cart({ data, dispatch, setShowCart }) {
 
   const cartRef = useRef();
+  const navigate = useNavigate();
 
   const closeCart = (e) => {
     if (cartRef.current == e.target) {
@@ -22,22 +25,37 @@ function Cart({ data, dispatch, setShowCart }) {
 
   const handleCheckout = async () => {
     let userEmail = localStorage.getItem("userEmail");
-    let response = await fetch("/api/order", {
-      method : 'POST',
-      headers : {
-        'Content-Type' : 'application/json'
-      },
-      body : JSON.stringify({
-        email : userEmail,
-        order_data : data,
-        order_date : new Date().toDateString()
+    let accessToken = localStorage.getItem("accessToken");
+
+    // If user is not logged in then login first
+    if(!accessToken){
+      setShowCart(false);
+      navigate("/login");
+      toast.error("You have to Login First",{
+        position : "top-center",
+        autoClose : 5000,
+        closeOnClick : true,
+        hideProgressBar : false,
       })
-    })
-    
-    if(response.status === 200){
-        dispatch({
-          type : "DROP"
+    }
+    else{
+        let response = await fetch("/api/order", {
+          method : 'POST',
+          headers : {
+            'Content-Type' : 'application/json'
+          },
+          body : JSON.stringify({
+            email : userEmail,
+            order_data : data,
+            order_date : new Date().toDateString()
+          })
         })
+      
+        if(response.status === 200){
+          dispatch({
+            type : "DROP"
+          })
+        }
     }
   }
 
@@ -47,6 +65,7 @@ function Cart({ data, dispatch, setShowCart }) {
   let totalPrice = data.reduce((total,food) => total + food.price , 0);
 
    return (
+    <>
       <div
         ref={cartRef}
         onClick={closeCart}
@@ -98,6 +117,7 @@ function Cart({ data, dispatch, setShowCart }) {
           }
         </div>
       </div>
+    </>
   )
   
 }
