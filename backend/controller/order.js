@@ -20,4 +20,15 @@ const orderRoute = async (req,res) => {
     }
 }
 
-module.exports = {orderRoute}
+const userOrder = async (req,res) => {
+    let {email} = req.body;
+    const orderData = await Order.findOne({email});
+    if(orderData){
+        res.status(200).json(orderData.order_data)
+    }
+    else{
+        res.status(500).json({success : false})
+    }
+}
+
+module.exports = {orderRoute, userOrder}
