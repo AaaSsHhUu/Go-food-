@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Queries = require("../models/query");
 const { validationResult } = require("express-validator")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -53,4 +54,15 @@ const loginUser = async (req, res) => {
     
 }
 
-module.exports = {createUser, loginUser}
+const userQuery = async (req,res) => {
+    let {email,query} = req.body;
+    if(email && query){
+        let newQuery = await Queries.create({email,query})
+        res.json(newQuery)
+    }
+    else{
+        res.status(400).json({msg : "Bad request"})
+    }
+}
+
+module.exports = {createUser, loginUser, userQuery}
