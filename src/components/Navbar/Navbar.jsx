@@ -6,6 +6,7 @@ import NavContext from "../../context/NavContext";
 import ReactDOM  from "react-dom";
 import Cart from "../Cart/Cart";
 import { useCart, useDispatchCart } from "../../context/ContextReducer";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { searchVal, setSearchVal,isLoggedIn,setIsLoggedIn } = useContext(NavContext);
@@ -22,6 +23,12 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("accessToken"); // getting current user accessToken
     localStorage.removeItem("userEmail"); // getting current user email
+    toast.success("Logged out successfully",{
+      position : "top-center",
+      autoClose : 3000,
+      closeOnClick : true,
+      hideProgressBar : false
+    }),
     setIsLoggedIn(false);
   }
 
@@ -94,7 +101,9 @@ const Navbar = () => {
                  <NavLink type="button" onClick={handleLogout}>Logout</NavLink>
              </li>
              : 
-             ""
+             <li className="hover:bg-green-500 rounded-md py-1 px-2">
+                 <NavLink to={'/signup'} >Signup</NavLink>
+             </li>
           }
         </ul>
       </div>
