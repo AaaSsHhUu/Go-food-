@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavContext from "../../context/NavContext";
+import { toast } from "react-toastify";
 
 function Login() {
   const [userCredentials, setUserCredentials] = useState({
@@ -23,12 +24,24 @@ function Login() {
       }),
     });
     const json = await response.json();
-    let {accessToken,email} = json
-    // console.log(accessToken);
-    localStorage.setItem("accessToken",accessToken);
-    localStorage.setItem("userEmail",email);
-    setIsLoggedIn(true);
-    navigate("/");
+    const toastOption = {
+      position : "top-center",
+      autoClose : 5000,
+      closeOnClick : true,
+      hideProgressBar : false,
+    }
+    if(json.success){
+      let {accessToken,email} = json
+      // console.log(accessToken);
+      localStorage.setItem("accessToken",accessToken);
+      localStorage.setItem("userEmail",email);
+      setIsLoggedIn(true);
+      toast.success("Logged In successfully",toastOption)
+      navigate("/");
+    }else{
+      toast.error("Invalid Email or password", toastOption)
+      navigate("/login")
+    }
   };
 
   const onChange = (e)=>{
