@@ -5,7 +5,7 @@ import { FaDiscord } from "react-icons/fa";
 
 function Contact() {
   const [info, setInfo] = useState({
-    username: "",
+    email: "",
     query: "",
   });
 
@@ -49,16 +49,17 @@ function Contact() {
         >
           <div className="flex flex-col px-8 py-6 items-center">
             <div className="w-full my-3">
-                <label className="font-bold" htmlFor="username">Username</label>
+                <label className="font-bold" htmlFor="email">Email</label>
                 <br />
                 <input
-                type="text"
+                type="email"
                 className="px-4 py-2 w-full bg-gray-300 focus:outline-green-600 rounded-md mt-2"
-                id="username"
-                name="username"
-                placeholder="Enter username"
+                id="email"
+                name="email"
+                placeholder="Enter Email"
                 value={info.username}
                 onChange={handleChange}
+                required
                 />
             </div>
 
@@ -67,17 +68,19 @@ function Contact() {
                 <br />
                 <textarea
                 type="text"
-                className="px-4 py-2 w-full bg-gray-300  focus:outline-green-600 rounded-md mt-2"
+                rows={8}
+                className="px-4 py-2 w-full bg-gray-300 max-h-32 focus:outline-green-600 rounded-md mt-2"
                 id="query"
                 name="query"
                 placeholder="Enter query"
                 value={info.query}
                 onChange={handleChange}
+                required
                 />
             </div>
 
             <div>
-                <button className="bg-green-500 text-white px-4 py-2 rounded-md mt-6 hover:bg-green-700 hover:outline-green-500">Submit</button>
+                <button className="bg-green-500 text-white px-4 py-1 rounded-md mt-6 hover:bg-green-700 hover:outline-green-500">Submit</button>
             </div>
           </div>
         </form>
