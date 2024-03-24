@@ -7,17 +7,28 @@ const ExpressError = require("../middleware/ExpressError");
 
 // Sign up 
 const createUser = async (req,res)=>{
-
+    let {email,password} = req.body;
+    // Data validation
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        return res.status(400).json({error : errors.array() })
+        return res.status(400).json({error : errors.array(), success : false })
     }
 
+    // If user already exist
+    const isUser = await User.findOne({email})
+    if(isUser){
+       return res.status(400).json({success : false, msg : "User with given email already exist"})
+    }
     const salt = await bcrypt.genSalt(10);
-    const newUser = req.body;
-    newUser.password = await bcrypt.hash(req.body.password,salt)
+    let newUser = req.body;
+    newUser.password = await bcrypt.hash(password,salt)
     const user = await User.create(newUser);
-    res.send(user);    
+    if(user){
+       return res.status(200).json({success : true});    
+    }
+    else{
+        return res.status(500).json({success : false, msg : "internal server error"});
+    }
 }
 
 // Log in 
@@ -26,8 +37,7 @@ const loginUser = async (req, res) => {
         const {email,password} = req.body;
 
         if(!email || !password){
-            res.status(400);
-            throw new ExpressError(400,"All fields are mandatory");
+           return res.status(400).json({success : false, msg : "All fields are mandatory"});
         }
 
         const isUser = await User.findOne({email});
@@ -43,12 +53,11 @@ const loginUser = async (req, res) => {
             },process.env.SECRET_KEY,{
                 expiresIn : "30m"
             })
-            res.status(200).json({accessToken,email});
+           return res.status(200).json({accessToken,email,success : true});
             
         }
         else{
-            res.status(401);
-            throw new ExpressError(401,"Email or Password is not valid");
+            return res.status(401).json({success : false});
         }
         
     
