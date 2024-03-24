@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -9,7 +10,7 @@ const Signup = () => {
     password: "",
     location: "",
   });
-
+  const navigate = useNavigate();
   const [viewPassword, setViewPassword] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -26,11 +27,23 @@ const Signup = () => {
         location: userCredentials.location,
       }),
     });
+
     const json = await response.json();
     console.log(json)
 
-    if(!json.success){
-      alert("Enter valid credentials");
+
+    const toastOption = {
+      position : "top-center",
+      autoClose : 5000,
+      closeOnClick : true,
+      hideProgressBar : false,
+    }
+    if(json.success){
+      toast.success("You are Registered, Login to continue", toastOption)
+      navigate('/login');
+    }
+    else{
+      toast.error("User with given email already exist",toastOption);
     }
   };
 
