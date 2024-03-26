@@ -15,7 +15,7 @@ function MyOrder() {
     });
     let data = await response.json();
     // console.log(data);
-    setOrderData(data);
+    setOrderData(data.reverse());
     // console.log(orderData)
   };
 
