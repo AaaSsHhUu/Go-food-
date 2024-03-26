@@ -13,4 +13,4 @@ const querySchema = new Schema({
 })
 
 const Queries = mongoose.model("Queries",querySchema);
-export default Queries;
+module.exports = Queries;
