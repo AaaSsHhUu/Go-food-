@@ -63,14 +63,14 @@ const Home = () => {
                               )
                             })
                           : 
-                          <div>Data not Found</div>
+                          <div className='text-2xl font-bold my-4'>Loading...</div>
                       }
                       </div>
                   </div>
                 )
               })
               :
-              <div>Data Not Found</div>
+              <div className='text-2xl font-bold my-4'>Loading...</div>
             }
           </div>
         </div>
