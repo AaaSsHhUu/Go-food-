@@ -17,7 +17,7 @@ const Home = () => {
 
   const loadData = async () => {
     try{
-      let response = await fetch("/api/data/foodData",{
+      let response = await fetch(`${import.meta.env.VITE_ROOT_ROUTE}/data/foodData`,{
         method : "POST",
         headers : {
           "Content-Type" : "application/json"

@@ -15,7 +15,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/user/signup", {
+    const response = await fetch(`${import.meta.env.VITE_ROOT_ROUTE}/user/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

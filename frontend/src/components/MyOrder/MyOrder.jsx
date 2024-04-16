@@ -4,7 +4,7 @@ function MyOrder() {
   const [orderData, setOrderData] = useState([]);
   const fetchOrderData = async () => {
     let userEmail = localStorage.getItem("userEmail");
-    let response = await fetch("/api/order/user_orders", {
+    let response = await fetch(`${import.meta.env.VITE_ROOT_ROUTE}/order/user_orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

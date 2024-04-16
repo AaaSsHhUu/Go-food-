@@ -13,7 +13,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/user/login", {
+    const response = await fetch(`${import.meta.env.VITE_ROOT_ROUTE}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

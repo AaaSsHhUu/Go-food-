@@ -39,7 +39,7 @@ function Cart({ data, dispatch, setShowCart }) {
       })
     }
     else{
-        let response = await fetch("/api/order", {
+        let response = await fetch(`${import.meta.env.VITE_ROOT_ROUTE}/order`, {
           method : 'POST',
           headers : {
             'Content-Type' : 'application/json'
