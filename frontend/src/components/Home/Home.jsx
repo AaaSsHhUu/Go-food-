@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {Card, DefaultCarousel} from '../index';
-import NavContext from '../../context/NavContext';
+import {NavContext} from '../../context/NavContextProvider';
 
 const Home = () => {
 

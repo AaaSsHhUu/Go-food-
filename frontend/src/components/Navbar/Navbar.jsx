@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { RiMenu2Line } from "react-icons/ri";
 import logo from "../../assets/logo.png";
-import NavContext from "../../context/NavContext";
+import {NavContext} from "../../context/NavContextProvider";
 import ReactDOM  from "react-dom";
 import Cart from "../Cart/Cart";
 import { useCart, useDispatchCart } from "../../context/ContextReducer";
