@@ -21,8 +21,8 @@ const Navbar = () => {
   },[])
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken"); // getting current user accessToken
-    localStorage.removeItem("userEmail"); // getting current user email
+    localStorage.removeItem("accessToken"); // removing current user accessToken
+    localStorage.removeItem("userEmail"); // removing current user email
     toast.success("Logged out successfully",{
       position : "top-center",
       autoClose : 3000,
